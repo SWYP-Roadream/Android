@@ -13,3 +13,8 @@ kotlin {
         jvmTarget = JvmTarget.JVM_17
     }
 }
+
+dependencies {
+    implementation(libs.javax.inject)
+    implementation(libs.androidx.paging.common)
+}
