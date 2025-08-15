@@ -1,6 +1,5 @@
-package com.yeogijeogi.roadream.ui.theme
+package com.yeogijeogi.presentation.theme.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

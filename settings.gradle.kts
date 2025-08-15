@@ -19,5 +19,10 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "Roadream"
 include(":app")
+include(":domain")
+include(":data")
+include(":presentation")
