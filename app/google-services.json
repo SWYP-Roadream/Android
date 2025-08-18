@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "694171362761",
+    "project_id": "yeogijeogi",
+    "storage_bucket": "yeogijeogi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694171362761:android:fd6724eb1926bf22623418",
+        "android_client_info": {
+          "package_name": "com.yeogijeogi.roadream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694171362761-fb31cul399698pgos6lfi6ciksc4cv6a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yeogijeogi.roadream",
+            "certificate_hash": "ec4857edaf9a6342c9330f0ee13865cf808b801b"
+          }
+        },
+        {
+          "client_id": "694171362761-fogjf5r3qane0dhhi6g7e9b13ampfi3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJj8WPX0oV_G1XPfxeP_74a_-6xHF0CiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694171362761-fogjf5r3qane0dhhi6g7e9b13ampfi3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

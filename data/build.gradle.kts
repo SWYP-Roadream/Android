@@ -69,4 +69,7 @@ dependencies {
     //paging
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.common)
+
+    //timber
+    implementation(libs.timber)
 }

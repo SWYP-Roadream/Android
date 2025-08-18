@@ -1,9 +1,16 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.gms.google.service)
+}
+
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
 }
 
 android {
@@ -18,6 +25,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        addManifestPlaceholders(mapOf("NATIVE_APP_KEY" to getApiKey("NATIVE_APP_KEY")))
+        buildConfigField("String", "KAKAO_NATIVE_KEY", getApiKey("KAKAO_NATIVE_KEY"))
     }
 
     buildTypes {
@@ -38,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -68,4 +78,18 @@ dependencies {
 
     //serialization
     implementation(libs.org.jetbrains.kotlinx.serialization)
+
+    //compose
+    implementation(libs.androidx.naviagtion.compose)
+
+    //firebase
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firebase.analytics)
+
+    //kakao
+    implementation(libs.kakao.common)
+    implementation(libs.kakao.auth)
+
+    //timber
+    implementation(libs.timber)
 }

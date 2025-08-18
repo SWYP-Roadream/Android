@@ -1,9 +1,16 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
 }
 
 android {
@@ -15,6 +22,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField("String", "ClientId", getApiKey("GOOGLE_CLIENT_ID"))
     }
 
     buildTypes {
@@ -35,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -73,4 +82,19 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.common)
     implementation(libs.androidx.paging.compose)
+
+    //google auth
+    implementation(libs.gms.play.service.auth)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.service.auth)
+    implementation(libs.androidx.libraries.identity.googleId)
+
+    //kakao
+    implementation(libs.kakao.common)
+    implementation(libs.kakao.auth)
+    implementation(libs.kakao.user)
+
+    //timber
+    implementation(libs.timber)
 }
