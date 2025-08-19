@@ -10,7 +10,7 @@ import com.yeogijeogi.presentation.login.LoginRoot
 import com.yeogijeogi.presentation.login.LoginViewModel
 import com.yeogijeogi.presentation.login.OnBoardingRoot
 
-fun NavGraphBuilder.loginNavigation(navController: NavHostController) {
+fun NavGraphBuilder.loginNavigation(navController: NavHostController, goMain: () -> Unit) {
     composable<LoginRoute> { backStackEntry ->
         val parentEntry = remember(backStackEntry) {
             navController.getBackStackEntry<Login>()
@@ -30,7 +30,9 @@ fun NavGraphBuilder.loginNavigation(navController: NavHostController) {
         }
         val vm: LoginViewModel = viewModel(viewModelStoreOwner = parentEntry)
         OnBoardingRoot(
-            viewModel = vm
+            viewModel = vm,
+            onBack = { navController.popBackStack() },
+            goMain = goMain
         )
     }
 }

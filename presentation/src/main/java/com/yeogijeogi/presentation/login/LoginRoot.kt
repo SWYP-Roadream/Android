@@ -65,6 +65,7 @@ fun LoginRoot(
             }
 
             is LoginEffect.OnBoarding -> onBoarding()
+            else -> Unit
         }
     }
 

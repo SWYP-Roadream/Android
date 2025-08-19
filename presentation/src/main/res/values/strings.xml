@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nicknameTitle">‘여기 저기\' 에 온 걸 환영해\\n닉네임을 설정해줘</string>
+    <string name="ageTitle">성별이 어떻게 돼?</string>
+    <string name="genderTitle">연령대를 선택해줘 !</string>
+    <string name="companionTitle">평소 누구와 자주 여행을 가?</string>
+    <string name="mbtiTitle">너의 MBTI 가 뭐야?</string>
+</resources>
