@@ -2,6 +2,7 @@ package com.yeogijeogi.presentation.login.navigation
 
 import android.util.Log
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -15,7 +16,7 @@ fun NavGraphBuilder.loginNavigation(navController: NavHostController, goMain: ()
         val parentEntry = remember(backStackEntry) {
             navController.getBackStackEntry<Login>()
         }
-        val vm: LoginViewModel = viewModel(viewModelStoreOwner = parentEntry)
+        val vm: LoginViewModel = hiltViewModel(viewModelStoreOwner = parentEntry)
         LoginRoot(
             viewModel = vm,
             onBoarding = {
@@ -28,7 +29,7 @@ fun NavGraphBuilder.loginNavigation(navController: NavHostController, goMain: ()
         val parentEntry = remember(backStackEntry) {
             navController.getBackStackEntry<Login>()
         }
-        val vm: LoginViewModel = viewModel(viewModelStoreOwner = parentEntry)
+        val vm: LoginViewModel = hiltViewModel(viewModelStoreOwner = parentEntry)
         OnBoardingRoot(
             viewModel = vm,
             onBack = { navController.popBackStack() },

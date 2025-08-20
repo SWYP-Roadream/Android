@@ -23,7 +23,7 @@ fun StepProgressBar(
     progress: Float,                 // 0f..1f
     modifier: Modifier = Modifier,
     height: Dp = 22.dp,
-    trackColor: Color = MaterialTheme.colorScheme.onPrimary,
+    trackColor: Color = Color.LightGray,
     indicatorColor: Color = MaterialTheme.colorScheme.primary,
     animationMillis: Int = 400
 ) {

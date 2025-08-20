@@ -29,7 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.yeogijeogi.presentation.R
 import com.yeogijeogi.presentation.login.model.LoginEffect
 import com.yeogijeogi.presentation.login.model.LoginEvent
-import com.yeogijeogi.presentation.login.model.LoginType
+import com.yeogijeogi.domain.model.enums.LoginType
 import com.yeogijeogi.presentation.login.util.AuthClient
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
 import com.yeogijeogi.presentation.util.ObserveAsEvents

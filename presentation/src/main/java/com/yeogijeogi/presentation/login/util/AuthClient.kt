@@ -15,7 +15,7 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.yeogijeogi.presentation.BuildConfig
-import com.yeogijeogi.presentation.login.model.LoginType
+import com.yeogijeogi.domain.model.enums.LoginType
 import com.yeogijeogi.presentation.model.SignIn
 import com.yeogijeogi.presentation.model.UserData
 import kotlinx.coroutines.suspendCancellableCoroutine

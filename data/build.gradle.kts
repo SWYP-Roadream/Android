@@ -1,9 +1,16 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("androidx.room")
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+fun getApiKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
 }
 
 android {
@@ -15,6 +22,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField("String", "SERVER_KEY", getApiKey("SERVER_KEY"))
     }
 
     buildTypes {
@@ -35,6 +43,9 @@ android {
     }
     room {
         schemaDirectory("$projectDir/schemas")
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

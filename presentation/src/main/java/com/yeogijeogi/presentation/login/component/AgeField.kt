@@ -15,7 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.component.RoundButton
-import com.yeogijeogi.domain.enums.Age
+import com.yeogijeogi.domain.model.enums.Age
+import com.yeogijeogi.presentation.component.OutlineButton
 
 @Composable
 fun AgeField(
@@ -33,12 +34,10 @@ fun AgeField(
         items(
             Age.entries
         ) { item ->
-            RoundButton(
+            OutlineButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = item.ageName,
-                backGroundColor = if (selected == item) MaterialTheme.colorScheme.primary else Color.White,
-                containerColor = if (selected == item) Color.White else Color.Black,
-                isCheck = selected == item,
+                isSelected = selected == item,
                 onClick = { onClick(item) }
             )
         }

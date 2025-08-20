@@ -1,8 +1,10 @@
 package com.yeogijeogi.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yeogijeogi.domain.model.data.SignUp
+import com.yeogijeogi.domain.model.enums.Mbti
+import com.yeogijeogi.domain.repository.LoginRepository
 import com.yeogijeogi.presentation.login.model.LoginEffect
 import com.yeogijeogi.presentation.login.model.LoginEvent
 import com.yeogijeogi.presentation.login.model.LoginState
@@ -11,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -19,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-
+    private val loginRepository: LoginRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())
@@ -81,13 +84,14 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginEvent.OnNext -> viewModelScope.launch {
-                when(event.screenType) {
+                when (event.screenType) {
                     OnBoardingScreenType.MBTI -> {
-                        if(!state.value.isCheck) {
+                        if (!state.value.isCheck) {
                             Timber.e("isCheck is false")
                             return@launch
                         }
                     }
+
                     else -> Unit
                 }
                 _effect.send(LoginEffect.OnNext(event.screenType))
@@ -103,7 +107,29 @@ class LoginViewModel @Inject constructor(
 
     private fun signUp() {
         viewModelScope.launch {
-            _effect.send(LoginEffect.GoMain)
+            try {
+                val info = state.value
+                val signUp = SignUp(
+                    provider = info.loginType ?: throw IllegalArgumentException("no Provider"),
+                    providerUserId = info.user?.token ?: throw IllegalArgumentException("no token"),
+                    imageUrl = info.user.urlProfile,
+                    nickname = info.nickname,
+                    ageGroup = info.age ?: throw IllegalArgumentException("no age"),
+                    companions = info.companions,
+                    mbti = Mbti.entries.find { it.name == info.mbti }
+                )
+
+                loginRepository.postSignUp(signUp)
+                    .catch {
+                        Timber.e("signUp error $it")
+                    }
+                    .collect {
+                        Timber.e("signUp success $it")
+                        _effect.send(LoginEffect.GoMain)
+                    }
+            } catch (e: Exception) {
+                Timber.e("signUp error $e")
+            }
         }
     }
 }

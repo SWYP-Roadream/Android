@@ -1,5 +1,6 @@
 package com.yeogijeogi.presentation.login
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -77,7 +78,7 @@ fun OnBoardingRoot(
                 when (effect.screenType) {
                     OnBoardingScreenType.MBTI -> onBoardingType = OnboardingType.END
                     else -> scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1, animationSpec = tween(400))
                     }
                 }
             }
@@ -86,7 +87,7 @@ fun OnBoardingRoot(
                 when (effect.screenType) {
                     OnBoardingScreenType.NICKNAME -> onBack()
                     else -> scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                        pagerState.animateScrollToPage(pagerState.currentPage - 1, animationSpec = tween(400))
                     }
                 }
             }

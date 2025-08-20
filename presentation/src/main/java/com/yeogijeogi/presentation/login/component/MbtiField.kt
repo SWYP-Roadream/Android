@@ -78,15 +78,19 @@ fun MbtiField(
             )
 
         }
-        Text(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .clickable(onClick = onClickSkip)
-                .padding(bottom = 32.dp),
-            text = "SKIP",
-            textAlign = TextAlign.Center
-        )
+        ){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onClickSkip),
+                text = "SKIP",
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+        }
     }
 }
 

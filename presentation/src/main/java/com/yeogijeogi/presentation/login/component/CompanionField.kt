@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -17,7 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.yeogijeogi.domain.enums.CompanionType
+import com.yeogijeogi.domain.model.enums.CompanionType
+import com.yeogijeogi.presentation.component.OutlineButton
 import com.yeogijeogi.presentation.component.RoundButton
 
 @Composable
@@ -49,12 +51,10 @@ fun CompanionField(
             items(
                 CompanionType.entries
             ) { item ->
-                RoundButton(
+                OutlineButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = item.companionName,
-                    backGroundColor = if (selected.contains(item)) MaterialTheme.colorScheme.primary else Color.White,
-                    containerColor = if (selected.contains(item)) Color.White else Color.Black,
-                    isCheck = selected.contains(item),
+                    isSelected = selected.contains(item),
                     onClick = { onClick(item) }
                 )
             }
@@ -63,11 +63,11 @@ fun CompanionField(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(onClick = onClickSkip)
-                .padding(bottom = 32.dp),
+                .clickable(onClick = onClickSkip),
             text = "SKIP",
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(32.dp))
     }
 
 }

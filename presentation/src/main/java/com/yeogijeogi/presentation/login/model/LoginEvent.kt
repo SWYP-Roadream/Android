@@ -1,8 +1,9 @@
 package com.yeogijeogi.presentation.login.model
 
-import com.yeogijeogi.domain.enums.Age
-import com.yeogijeogi.domain.enums.CompanionType
-import com.yeogijeogi.domain.enums.Gender
+import com.yeogijeogi.domain.model.enums.Age
+import com.yeogijeogi.domain.model.enums.CompanionType
+import com.yeogijeogi.domain.model.enums.Gender
+import com.yeogijeogi.domain.model.enums.LoginType
 import com.yeogijeogi.presentation.model.UserData
 
 sealed interface LoginEvent {
