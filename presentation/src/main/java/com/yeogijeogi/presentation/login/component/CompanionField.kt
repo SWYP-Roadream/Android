@@ -15,39 +15,31 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.domain.model.enums.CompanionType
 import com.yeogijeogi.presentation.component.OutlineButton
 import com.yeogijeogi.presentation.component.RoundButton
+import com.yeogijeogi.presentation.theme.ui.theme.bodyMid16
+import com.yeogijeogi.presentation.theme.ui.theme.gray30
 
 @Composable
 fun CompanionField(
     modifier: Modifier = Modifier,
     selected: List<CompanionType>,
-    onClick: (CompanionType) -> Unit,
+    onClickCompanion: (CompanionType) -> Unit,
     onClickSkip: () -> Unit,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-    ){
+    ) {
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             columns = GridCells.Fixed(2)
         ) {
-            item(
-                span = { GridItemSpan(2) }
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "(세가지 골라줘)",
-                    textAlign = TextAlign.Center
-                )
-            }
-
             items(
                 CompanionType.entries
             ) { item ->
@@ -55,7 +47,7 @@ fun CompanionField(
                     modifier = Modifier.fillMaxWidth(),
                     text = item.companionName,
                     isSelected = selected.contains(item),
-                    onClick = { onClick(item) }
+                    onClick = { onClickCompanion(item) }
                 )
             }
         }
@@ -65,9 +57,19 @@ fun CompanionField(
                 .fillMaxWidth()
                 .clickable(onClick = onClickSkip),
             text = "SKIP",
+            style = MaterialTheme.typography.bodyMid16.copy(
+                color = gray30
+            ),
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(28.dp))
+        RoundButton(
+            modifier = Modifier
+                .padding(20.dp)
+                .fillMaxWidth(),
+            text = "Next",
+            onClick = onClick
+        )
     }
 
 }

@@ -1,6 +1,5 @@
 package com.yeogijeogi.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yeogijeogi.domain.model.data.Login
@@ -59,12 +58,14 @@ class LoginViewModel @Inject constructor(
 
             }
 
-            is LoginEvent.ChangeMbti -> viewModelScope.launch {
+            is LoginEvent.SelectedMbti -> viewModelScope.launch {
                 _state.update { it.copy(mbti = event.mbti) }
             }
 
             is LoginEvent.ChangeNickname -> viewModelScope.launch {
-                _state.update { it.copy(nickname = event.nickname) }
+                if (event.nickname.length <= 10) {
+                    _state.update { it.copy(nickname = event.nickname) }
+                }
             }
 
             is LoginEvent.OnClickSkip -> viewModelScope.launch {
@@ -74,7 +75,7 @@ class LoginViewModel @Inject constructor(
                             it.copy(companions = listOf())
                         }
 
-                        OnBoardingScreenType.MBTI -> it.copy(mbti = "")
+                        OnBoardingScreenType.MBTI -> it.copy(mbti = null)
                         else -> it
                     }
                 }
@@ -110,6 +111,9 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginEvent.OnBack -> viewModelScope.launch {
+                if(event.screenType == OnBoardingScreenType.NICKNAME) {
+                    _state.update { LoginState() }
+                }
                 _effect.send(LoginEffect.OnBack(event.screenType))
             }
 
@@ -128,7 +132,7 @@ class LoginViewModel @Inject constructor(
                     nickname = info.nickname,
                     ageGroup = info.age ?: throw IllegalArgumentException("no age"),
                     companions = info.companions,
-                    mbti = Mbti.entries.find { it.name == info.mbti }
+                    mbti = info.mbti
                 )
 
                 loginRepository.postSignUp(signUp)

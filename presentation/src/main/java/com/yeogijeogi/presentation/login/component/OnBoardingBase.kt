@@ -1,7 +1,6 @@
 package com.yeogijeogi.presentation.login.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,38 +15,38 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.yeogijeogi.presentation.component.RoundButton
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
+import com.yeogijeogi.presentation.theme.ui.theme.bodySemiBold14
+import com.yeogijeogi.presentation.theme.ui.theme.gray10
+import com.yeogijeogi.presentation.theme.ui.theme.gray30
 
 @Composable
 fun OnBoardingBase(
     modifier: Modifier = Modifier,
     title: String,
+    subTitle: String? = null,
     content: @Composable ColumnScope.() -> Unit,
-    onClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color.White)
+            .background(color = Color.White),
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 50.dp, bottom = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -62,22 +61,27 @@ fun OnBoardingBase(
                     contentDescription = null
                 )
             }
-
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = title,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    color = gray10
+                ),
                 textAlign = TextAlign.Center
             )
+            subTitle?.let {
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodySemiBold14.copy(
+                        color = gray30
+                    ),
+                    textAlign = TextAlign.Center
+                )
+            }
+            Spacer(modifier = Modifier.height(40.dp))
         }
-
         content()
-
-        RoundButton(
-            modifier = Modifier.padding(20.dp).fillMaxWidth(),
-            text = "Next",
-            onClick = onClick
-        )
     }
 }
 
@@ -97,7 +101,6 @@ private fun OnBoardingBasePreview() {
 
                 }
             },
-            onClick = {}
         )
     }
 }

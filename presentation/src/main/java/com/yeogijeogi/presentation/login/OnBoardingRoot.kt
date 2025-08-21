@@ -78,7 +78,10 @@ fun OnBoardingRoot(
                 when (effect.screenType) {
                     OnBoardingScreenType.MBTI -> onBoardingType = OnboardingType.END
                     else -> scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1, animationSpec = tween(400))
+                        pagerState.animateScrollToPage(
+                            pagerState.currentPage + 1,
+                            animationSpec = tween(400)
+                        )
                     }
                 }
             }
@@ -87,7 +90,10 @@ fun OnBoardingRoot(
                 when (effect.screenType) {
                     OnBoardingScreenType.NICKNAME -> onBack()
                     else -> scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage - 1, animationSpec = tween(400))
+                        pagerState.animateScrollToPage(
+                            pagerState.currentPage - 1,
+                            animationSpec = tween(400)
+                        )
                     }
                 }
             }
@@ -109,6 +115,7 @@ fun OnBoardingRoot(
                 delay(500L)
                 viewModel.onEvent(LoginEvent.SignUp)
             }
+
             else -> Unit
         }
     }
@@ -164,6 +171,12 @@ fun UserInfoScreen(
             val onBoardingType = OnBoardingScreenType.entries[index]
             OnBoardingBase(
                 title = getOnBoardingTitle(onBoardingType),
+                subTitle = when (onBoardingType) {
+                    OnBoardingScreenType.NICKNAME -> "(프로필에 쓰일 이름을 적어줘)"
+                    OnBoardingScreenType.COMPANION -> "(세가지 골라줘)"
+                    OnBoardingScreenType.MBTI -> "(MBTI 유형별로 AI 가 추천 장소를 알려주려고 해!)"
+                    else -> null
+                },
                 content = {
                     when (onBoardingType) {
                         OnBoardingScreenType.NICKNAME -> {
@@ -172,7 +185,8 @@ fun UserInfoScreen(
                                     .weight(1f)
                                     .padding(horizontal = 20.dp),
                                 value = state.nickname,
-                                onChangeValue = { onEvent(LoginEvent.ChangeNickname(it)) }
+                                onChangeValue = { onEvent(LoginEvent.ChangeNickname(it)) },
+                                onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
                             )
                         }
 
@@ -180,44 +194,43 @@ fun UserInfoScreen(
                             GenderField(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .padding(top = 55.dp)
                                     .padding(horizontal = 20.dp),
                                 selected = state.gender,
-                                onClick = { onEvent(LoginEvent.SelectedGender(it)) }
+                                onClickGender = { onEvent(LoginEvent.SelectedGender(it)) },
+                                onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
                             )
                         }
 
                         OnBoardingScreenType.AGE -> AgeField(
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(top = 20.dp)
                                 .padding(horizontal = 20.dp),
                             selected = state.age,
-                            onClick = { onEvent(LoginEvent.SelectedAge(it)) }
+                            onClickAge = { onEvent(LoginEvent.SelectedAge(it)) },
+                            onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
                         )
 
                         OnBoardingScreenType.COMPANION -> CompanionField(
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(top = 20.dp)
                                 .padding(horizontal = 20.dp),
                             selected = state.companions,
-                            onClick = { onEvent(LoginEvent.SelectedCompanion(it)) },
-                            onClickSkip = { onEvent(LoginEvent.OnClickSkip(onBoardingType)) }
+                            onClickCompanion = { onEvent(LoginEvent.SelectedCompanion(it)) },
+                            onClickSkip = { onEvent(LoginEvent.OnClickSkip(onBoardingType)) },
+                            onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
                         )
 
                         OnBoardingScreenType.MBTI -> MbtiField(
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(top = 20.dp)
                                 .padding(horizontal = 20.dp),
-                            value = state.mbti,
-                            onChangeValue = { onEvent(LoginEvent.ChangeMbti(it)) },
-                            onClickSkip = { onEvent(LoginEvent.OnClickSkip(onBoardingType)) }
+                            selected = state.mbti,
+                            onClickMbti = { onEvent(LoginEvent.SelectedMbti(it)) },
+                            onClickSkip = { onEvent(LoginEvent.OnClickSkip(onBoardingType)) },
+                            onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
                         )
                     }
                 },
-                onClick = { onEvent(LoginEvent.OnNext(onBoardingType)) }
             )
         }
     }
@@ -225,7 +238,7 @@ fun UserInfoScreen(
 
 @Composable
 private fun getOnBoardingTitle(screenType: OnBoardingScreenType): String {
-    return when(screenType) {
+    return when (screenType) {
         OnBoardingScreenType.NICKNAME -> stringResource(R.string.nicknameTitle)
         OnBoardingScreenType.GENDER -> stringResource(R.string.genderTitle)
         OnBoardingScreenType.AGE -> stringResource(R.string.ageTitle)

@@ -4,6 +4,7 @@ import com.yeogijeogi.domain.model.enums.Age
 import com.yeogijeogi.domain.model.enums.CompanionType
 import com.yeogijeogi.domain.model.enums.Gender
 import com.yeogijeogi.domain.model.enums.LoginType
+import com.yeogijeogi.domain.model.enums.Mbti
 import com.yeogijeogi.presentation.model.UserData
 
 sealed interface LoginEvent {
@@ -13,7 +14,7 @@ sealed interface LoginEvent {
     data class SelectedGender(val gender: Gender?): LoginEvent
     data class SelectedAge(val age: Age?): LoginEvent
     data class SelectedCompanion(val companion: CompanionType): LoginEvent
-    data class ChangeMbti(val mbti: String): LoginEvent
+    data class SelectedMbti(val mbti: Mbti): LoginEvent
     data class OnClickSkip(val screenType: OnBoardingScreenType): LoginEvent
     data class OnNext(val screenType: OnBoardingScreenType): LoginEvent
     data class OnBack(val screenType: OnBoardingScreenType): LoginEvent
