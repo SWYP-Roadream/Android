@@ -4,6 +4,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.yeogijeogi.data.mapper.toDomain
+import com.yeogijeogi.data.mapper.toEntity
+import com.yeogijeogi.data.model.AuthInfoEntity
 import com.yeogijeogi.domain.database.SessionStorage
 import com.yeogijeogi.domain.model.data.AuthInfo
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +16,7 @@ import javax.inject.Inject
 
 class DataStoreSessionStorage @Inject constructor(
     private val dataStore: DataStore<Preferences>
-): SessionStorage {
+) : SessionStorage {
 
     object PreferencesKey {
         val TOKEN = stringPreferencesKey("TOKEN")
@@ -22,14 +25,14 @@ class DataStoreSessionStorage @Inject constructor(
     override suspend fun getToken(): Flow<AuthInfo?> {
         return dataStore.data.map { preferences ->
             preferences[PreferencesKey.TOKEN]?.let { token ->
-                Json.decodeFromString<AuthInfo>(token)
+                Json.decodeFromString<AuthInfoEntity>(token).toDomain()
             }
         }
     }
 
     override suspend fun setToken(info: AuthInfo?) {
         dataStore.edit { prefs ->
-            prefs[PreferencesKey.TOKEN] = Json.encodeToString(info)
+            prefs[PreferencesKey.TOKEN] = Json.encodeToString(info?.toEntity())
         }
     }
 }

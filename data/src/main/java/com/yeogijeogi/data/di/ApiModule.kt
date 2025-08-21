@@ -6,8 +6,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.yeogijeogi.data.BuildConfig
 import com.yeogijeogi.data.database.DataStoreSessionStorage
+import com.yeogijeogi.data.model.AuthInfoEntity
 import com.yeogijeogi.data.service.LoginService
-import com.yeogijeogi.domain.model.data.AuthInfo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -76,7 +76,7 @@ object ApiModule {
                 Timber.e("token : $token, refreshToken $refreshToken")
                 if (token != null && refreshToken != null) {
                     CoroutineScope(Dispatchers.IO).launch {
-                        dataStore.setToken(AuthInfo(token, refreshToken))
+                        dataStore.setToken(AuthInfoEntity(token, refreshToken))
                     }
                 }
                 response
