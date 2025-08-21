@@ -1,10 +1,13 @@
 package com.yeogijeogi.presentation.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yeogijeogi.domain.model.data.Login
 import com.yeogijeogi.domain.model.data.SignUp
 import com.yeogijeogi.domain.model.enums.Mbti
 import com.yeogijeogi.domain.repository.LoginRepository
+import com.yeogijeogi.domain.usecase.LoginUseCase
 import com.yeogijeogi.presentation.login.model.LoginEffect
 import com.yeogijeogi.presentation.login.model.LoginEvent
 import com.yeogijeogi.presentation.login.model.LoginState
@@ -22,7 +25,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())
@@ -33,18 +37,26 @@ class LoginViewModel @Inject constructor(
 
     fun onEvent(event: LoginEvent) {
         when (event) {
-            is LoginEvent.OnLogin -> {
+            is LoginEvent.OnClickLoginImage -> {
                 viewModelScope.launch {
                     _state.update { it.copy(loginType = event.type) }
                     _effect.send(LoginEffect.OnLogin(event.type))
                 }
             }
 
-            is LoginEvent.OnBoarding -> {
+            is LoginEvent.OnLogin -> {
+                _state.update { it.copy(user = event.user) }
                 viewModelScope.launch {
-                    _state.update { it.copy(user = event.user) }
-                    _effect.send(LoginEffect.OnBoarding)
+                    loginUseCase(Login(event.type, event.user?.token ?: ""))
+                        .onFailure {
+                            Timber.e("OnLogin error $it")
+                            _effect.send(LoginEffect.OnBoarding)
+                        }
+                        .onSuccess {
+                            _effect.send(LoginEffect.GoMain)
+                        }
                 }
+
             }
 
             is LoginEvent.ChangeMbti -> viewModelScope.launch {

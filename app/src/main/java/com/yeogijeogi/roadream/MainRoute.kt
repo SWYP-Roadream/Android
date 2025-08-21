@@ -12,18 +12,27 @@ import com.yeogijeogi.presentation.login.navigation.LoginRoute
 import com.yeogijeogi.presentation.login.navigation.loginNavigation
 
 @Composable
-fun MainRoute(modifier: Modifier = Modifier) {
+fun MainRoute(
+    modifier: Modifier = Modifier,
+    isLoggedIn: Boolean
+) {
     val navController = rememberNavController()
 
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Login
+        startDestination = if (isLoggedIn) HomeRoute else Login
     ) {
         navigation<Login>(startDestination = LoginRoute) {
             loginNavigation(
                 navController,
-                goMain = { navController.navigate(HomeRoute) }
+                goMain = {
+                    navController.navigate(HomeRoute) {
+                        popUpTo(Login) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
         homeNavigation(navController)

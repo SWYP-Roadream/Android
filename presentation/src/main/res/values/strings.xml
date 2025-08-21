@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nicknameTitle">‘여기 저기\' 에 온 걸 환영해\\n닉네임을 설정해줘</string>
+    <string name="nicknameTitle">‘여기 저기\' 에 온 걸 환영해\n닉네임을 설정해줘</string>
     <string name="ageTitle">성별이 어떻게 돼?</string>
     <string name="genderTitle">연령대를 선택해줘 !</string>
     <string name="companionTitle">평소 누구와 자주 여행을 가?</string>
     <string name="mbtiTitle">너의 MBTI 가 뭐야?</string>
+    <string name="login_title">여행자들을\n위한\n진정한\n로드맵\n\'여기저기\'</string>
+    <string name="oauth_login_title">간편 로그인</string>
 </resources>

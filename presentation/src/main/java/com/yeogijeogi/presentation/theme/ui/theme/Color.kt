@@ -28,3 +28,6 @@ val gray40 = Color(0xFF5A5C63)
 val gray30 = Color(0xFF46474C)
 val gray20 = Color(0xFF37383C)
 val gray10 = Color(0xFF212225)
+
+val selectNavigationColor = Color(0xFF17A1FA)
+val unSelectNavigationColor = Color(0xFFE4E4E4)

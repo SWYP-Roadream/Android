@@ -9,4 +9,9 @@ interface LoginService {
     suspend fun postSignUp(
         @Body requestBody: RequestBody
     )
+
+    @POST("/user/login")
+    suspend fun login(
+        @Body requestBody: RequestBody
+    )
 }

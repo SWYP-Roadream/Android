@@ -21,7 +21,8 @@ fun NavGraphBuilder.loginNavigation(navController: NavHostController, goMain: ()
             viewModel = vm,
             onBoarding = {
                 navController.navigate(OnBoardingRoute)
-            }
+            },
+            goMain = goMain
         )
     }
 

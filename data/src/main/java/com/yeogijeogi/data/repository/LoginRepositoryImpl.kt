@@ -2,6 +2,7 @@ package com.yeogijeogi.data.repository
 
 import com.yeogijeogi.data.mapper.toRequestBody
 import com.yeogijeogi.data.service.LoginService
+import com.yeogijeogi.domain.model.data.Login
 import com.yeogijeogi.domain.model.data.SignUp
 import com.yeogijeogi.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,5 +20,9 @@ class LoginRepositoryImpl @Inject constructor(
                 emit(signUp.providerUserId)
             }
             .onFailure { throw it }
+    }
+
+    override suspend fun postLogin(login: Login): Result<Unit> = runCatching {
+        loginService.login(login.toRequestBody())
     }
 }

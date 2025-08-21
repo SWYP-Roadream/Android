@@ -7,8 +7,8 @@ import com.yeogijeogi.domain.model.enums.LoginType
 import com.yeogijeogi.presentation.model.UserData
 
 sealed interface LoginEvent {
-    data class OnLogin(val type: LoginType): LoginEvent
-    data class OnBoarding(val user: UserData?): LoginEvent
+    data class OnClickLoginImage(val type: LoginType): LoginEvent
+    data class OnLogin(val user: UserData?, val type: LoginType): LoginEvent
     data class ChangeNickname(val nickname: String): LoginEvent
     data class SelectedGender(val gender: Gender?): LoginEvent
     data class SelectedAge(val age: Age?): LoginEvent

@@ -1,6 +1,8 @@
 package com.yeogijeogi.data.mapper
 
+import com.yeogijeogi.data.model.LoginRequest
 import com.yeogijeogi.data.model.SignUpRequest
+import com.yeogijeogi.domain.model.data.Login
 import com.yeogijeogi.domain.model.data.SignUp
 import okhttp3.RequestBody
 
@@ -13,5 +15,12 @@ fun SignUp.toRequestBody(): RequestBody {
         ageGroup = ageGroup.name,
         companions = companions.map { it.name },
         mbti = mbti?.name
+    ).toRequestBody()
+}
+
+fun Login.toRequestBody(): RequestBody {
+    return LoginRequest(
+        provider = provider.name,
+        providerUserId = providerUserId
     ).toRequestBody()
 }
