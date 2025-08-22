@@ -16,3 +16,11 @@ val PathIcon: ImageVector
 val MyPageIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.my_page)
+
+val PlusIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.plus)
+
+val ArrowRightIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.arrow_right)
