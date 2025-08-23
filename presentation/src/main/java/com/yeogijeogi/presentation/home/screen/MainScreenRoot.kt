@@ -2,13 +2,14 @@ package com.yeogijeogi.presentation.home.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -34,42 +35,50 @@ fun MainScreenRoot() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
-    val scrollState = rememberScrollState()
+    val lazyState = rememberLazyListState()
     val pagerState = rememberPagerState { 5 }
-    Column(
+    LazyColumn(
+        state = lazyState,
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color.White)
-            .padding(horizontal = 20.dp, vertical = 30.dp)
-            .verticalScroll(scrollState)
+            .background(color = Color.White),
+        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 30.dp)
     ) {
-        SearchBar(
-            modifier = modifier,
-            value = "",
-            onChangeValue = {}
-        )
-        Spacer(modifier = Modifier.height(26.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "로드림 님!\n여행을 더나봐요!",
-                style = MaterialTheme.typography.titleLarge.copy(color = gray10)
+        item {
+            SearchBar(
+                modifier = modifier,
+                value = "",
+                onChangeValue = {}
             )
-
-            Text(
-                text = "D-Day",
-                style = MaterialTheme.typography.displayLarge.copy(color = gray10)
-            )
+            Spacer(modifier = Modifier.height(26.dp))
         }
-        Spacer(modifier = Modifier.height(15.dp))
-        EmptySchedule()
-        Spacer(modifier = Modifier.height(20.dp))
-        PopularSchedule(pagerState = pagerState)
-        Spacer(modifier = Modifier.height(30.dp))
-        AISchedule()
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "로드림 님!\n여행을 더나봐요!",
+                    style = MaterialTheme.typography.titleLarge.copy(color = gray10)
+                )
+
+                Text(
+                    text = "D-Day",
+                    style = MaterialTheme.typography.displayLarge.copy(color = gray10)
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+        }
+        item {
+            EmptySchedule()
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+        item {
+            PopularSchedule(pagerState = pagerState)
+            Spacer(modifier = Modifier.height(30.dp))
+        }
+        item { AISchedule() }
     }
 }
 

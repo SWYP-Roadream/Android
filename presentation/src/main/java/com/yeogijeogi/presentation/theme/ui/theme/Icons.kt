@@ -24,3 +24,7 @@ val PlusIcon: ImageVector
 val ArrowRightIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.arrow_right)
+
+val BookmarkOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.bookmark_outline)

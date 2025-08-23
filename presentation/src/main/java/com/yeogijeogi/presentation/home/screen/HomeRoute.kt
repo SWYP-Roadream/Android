@@ -115,11 +115,11 @@ fun HomeRoute() {
             navController = navController
         ) {
             composable<HomeRouteMain> {
-                Text(text = "홈")
+                MainScreenRoot()
             }
 
             composable<HomeRoutePath> {
-                Text(text = "일정")
+                PathScreenRoot()
             }
 
             composable<HomeRouteMyPage> {
