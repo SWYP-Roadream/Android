@@ -1,7 +1,6 @@
 package com.yeogijeogi.presentation.login.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,10 +29,10 @@ import com.yeogijeogi.presentation.component.RoundButton
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
 import com.yeogijeogi.presentation.theme.ui.theme.bodyMid16
 import com.yeogijeogi.presentation.theme.ui.theme.captionRegular12
-import com.yeogijeogi.presentation.theme.ui.theme.gray10
+import com.yeogijeogi.presentation.theme.ui.theme.gray17
 import com.yeogijeogi.presentation.theme.ui.theme.gray40
-import com.yeogijeogi.presentation.theme.ui.theme.gray60
-import com.yeogijeogi.presentation.theme.ui.theme.gray90
+import com.yeogijeogi.presentation.theme.ui.theme.gray80
+import com.yeogijeogi.presentation.theme.ui.theme.gray99
 
 @Composable
 fun NicknameTextField(
@@ -54,7 +53,7 @@ fun NicknameTextField(
                 onValueChange = onChangeValue,
                 singleLine = true,
                 textStyle = MaterialTheme.typography.bodyMid16.copy(
-                    color = gray10
+                    color = gray17
                 ),
                 decorationBox = { innerTextField ->
                     Box(
@@ -62,7 +61,7 @@ fun NicknameTextField(
                             .fillMaxWidth()
                             .heightIn(min = 40.dp)
                             .clip(RoundedCornerShape(8.dp))
-                            .background(color = gray90)
+                            .background(color = gray99)
                             .padding(horizontal = 12.dp, vertical = 8.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
@@ -70,7 +69,7 @@ fun NicknameTextField(
                             Text(
                                 text = "닉네임",
                                 style = MaterialTheme.typography.bodyMid16.copy(
-                                    color = gray60
+                                    color = gray80
                                 )
                             )
                         }

@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
 import com.yeogijeogi.presentation.theme.ui.theme.gray100
-import com.yeogijeogi.presentation.theme.ui.theme.gray80
+import com.yeogijeogi.presentation.theme.ui.theme.gray97
 import com.yeogijeogi.presentation.theme.ui.theme.gray95
 
 @Composable
@@ -34,7 +34,7 @@ fun RoundButton(
     val textColor = if (enabled) {
         gray100
     } else {
-        gray80
+        gray97
     }
     Box(
         modifier = modifier

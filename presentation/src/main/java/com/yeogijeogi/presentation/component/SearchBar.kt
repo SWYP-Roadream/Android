@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.R
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
 import com.yeogijeogi.presentation.theme.ui.theme.bodyMid16
-import com.yeogijeogi.presentation.theme.ui.theme.gray50
+import com.yeogijeogi.presentation.theme.ui.theme.gray60
 
 @Composable
 fun SearchBar(
@@ -51,7 +51,7 @@ fun SearchBar(
                             Text(
                                 text = "여행지, 장소 검색",
                                 style = MaterialTheme.typography.bodyMid16.copy(
-                                    color = gray50
+                                    color = gray60
                                 )
                             )
                         }

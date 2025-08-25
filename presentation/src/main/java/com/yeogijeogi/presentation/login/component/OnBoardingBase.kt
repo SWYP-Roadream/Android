@@ -1,7 +1,6 @@
 package com.yeogijeogi.presentation.login.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -27,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
 import com.yeogijeogi.presentation.theme.ui.theme.bodySemiBold14
-import com.yeogijeogi.presentation.theme.ui.theme.gray10
+import com.yeogijeogi.presentation.theme.ui.theme.gray17
 import com.yeogijeogi.presentation.theme.ui.theme.gray30
 
 @Composable
@@ -65,7 +64,7 @@ fun OnBoardingBase(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge.copy(
-                    color = gray10
+                    color = gray17
                 ),
                 textAlign = TextAlign.Center
             )

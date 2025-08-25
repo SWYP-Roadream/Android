@@ -1,11 +1,10 @@
 package com.yeogijeogi.presentation.home.screen
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,15 +22,22 @@ import com.yeogijeogi.presentation.component.PathInfoItem
 import com.yeogijeogi.presentation.component.RoundButton
 import com.yeogijeogi.presentation.theme.ui.theme.BookmarkOutline
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
-import com.yeogijeogi.presentation.theme.ui.theme.gray10
+import com.yeogijeogi.presentation.theme.ui.theme.gray17
 
 @Composable
-fun PathScreenRoot() {
-    PathScreen()
+fun PathScreenRoot(
+    onCreatedPath: () -> Unit,
+) {
+    PathScreen(
+        onCreatedPath = onCreatedPath
+    )
 }
 
 @Composable
-fun PathScreen(modifier: Modifier = Modifier) {
+fun PathScreen(
+    modifier: Modifier = Modifier,
+    onCreatedPath: () -> Unit,
+) {
     val lazyState = rememberLazyListState()
     Column(
         modifier = modifier
@@ -49,7 +55,7 @@ fun PathScreen(modifier: Modifier = Modifier) {
             Text(
                 text = "나의 일정",
                 style = MaterialTheme.typography.titleLarge.copy(
-                    color = gray10
+                    color = gray17
                 )
             )
 
@@ -81,7 +87,8 @@ fun PathScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 20.dp),
-            text = "나만의 여행 일정 만들기"
+            text = "나만의 여행 일정 만들기",
+            onClick = onCreatedPath
         )
     }
 }
@@ -90,6 +97,8 @@ fun PathScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun PathScreenPreview() {
     RoadreamTheme {
-        PathScreen()
+        PathScreen(
+            onCreatedPath = {}
+        )
     }
 }

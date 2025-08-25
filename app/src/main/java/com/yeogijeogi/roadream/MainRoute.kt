@@ -10,6 +10,7 @@ import com.yeogijeogi.presentation.home.navigation.homeNavigation
 import com.yeogijeogi.presentation.login.navigation.Login
 import com.yeogijeogi.presentation.login.navigation.LoginRoute
 import com.yeogijeogi.presentation.login.navigation.loginNavigation
+import com.yeogijeogi.presentation.schedule.navigation.scheduleNavigation
 
 @Composable
 fun MainRoute(
@@ -36,5 +37,6 @@ fun MainRoute(
             )
         }
         homeNavigation(navController)
+        scheduleNavigation(navController)
     }
 }

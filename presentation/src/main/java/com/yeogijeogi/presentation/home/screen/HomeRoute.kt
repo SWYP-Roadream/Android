@@ -1,13 +1,11 @@
 package com.yeogijeogi.presentation.home.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,7 +32,9 @@ import com.yeogijeogi.presentation.theme.ui.theme.unSelectNavigationColor
 import timber.log.Timber
 
 @Composable
-fun HomeRoute() {
+fun HomeRoute(
+    onCreatedPath: () -> Unit,
+) {
     val navController = rememberNavController()
     val barItems = listOf(
         BottomNavigationItem(
@@ -119,11 +119,13 @@ fun HomeRoute() {
             }
 
             composable<HomeRoutePath> {
-                PathScreenRoot()
+                PathScreenRoot(
+                    onCreatedPath = onCreatedPath
+                )
             }
 
             composable<HomeRouteMyPage> {
-                Text(text = "마이페이지")
+                MyPageScreenRoot()
             }
         }
     }

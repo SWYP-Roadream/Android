@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.theme.ui.theme.ArrowRightIcon
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
-import com.yeogijeogi.presentation.theme.ui.theme.black
+import com.yeogijeogi.presentation.theme.ui.theme.gray0
 
 @Composable
 fun PopularSchedule(
@@ -46,7 +46,7 @@ fun PopularSchedule(
             Text(
                 text = "인기일정",
                 style = MaterialTheme.typography.titleLarge.copy(
-                    color = black
+                    color = gray0
                 )
             )
 

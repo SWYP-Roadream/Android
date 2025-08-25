@@ -28,3 +28,24 @@ val ArrowRightIcon: ImageVector
 val BookmarkOutline: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.bookmark_outline)
+
+val AlarmOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.alarm_outline)
+
+
+val AlarmCircleOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.alarm_circle_outline)
+
+val SettingOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.setting_outline)
+
+val CalenderOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.calender_outline)
+
+val CaretDownOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.caret_down_outline)

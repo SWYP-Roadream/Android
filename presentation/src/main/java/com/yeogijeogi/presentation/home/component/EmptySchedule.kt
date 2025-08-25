@@ -18,18 +18,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yeogijeogi.presentation.theme.ui.theme.PlusIcon
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
-import com.yeogijeogi.presentation.theme.ui.theme.black
+import com.yeogijeogi.presentation.theme.ui.theme.gray0
 import com.yeogijeogi.presentation.theme.ui.theme.bodySemiBold12
 import com.yeogijeogi.presentation.theme.ui.theme.bodySemiBold14
 import com.yeogijeogi.presentation.theme.ui.theme.gray100
-import com.yeogijeogi.presentation.theme.ui.theme.gray80
+import com.yeogijeogi.presentation.theme.ui.theme.gray97
 
 @Composable
 fun EmptySchedule(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = gray80, shape = RoundedCornerShape(12.dp))
+            .background(color = gray97, shape = RoundedCornerShape(12.dp))
             .padding(vertical = 22.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)
@@ -37,7 +37,7 @@ fun EmptySchedule(modifier: Modifier = Modifier) {
         Text(
             text = "나만의 일정을 만들어 보세요!",
             style = MaterialTheme.typography.bodySemiBold14.copy(
-                color = black
+                color = gray0
             )
         )
 

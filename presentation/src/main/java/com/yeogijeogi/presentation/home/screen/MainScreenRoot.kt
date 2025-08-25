@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +24,7 @@ import com.yeogijeogi.presentation.home.component.AISchedule
 import com.yeogijeogi.presentation.home.component.EmptySchedule
 import com.yeogijeogi.presentation.home.component.PopularSchedule
 import com.yeogijeogi.presentation.theme.ui.theme.RoadreamTheme
-import com.yeogijeogi.presentation.theme.ui.theme.gray10
+import com.yeogijeogi.presentation.theme.ui.theme.gray17
 
 @Composable
 fun MainScreenRoot() {
@@ -60,12 +58,12 @@ fun MainScreen(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "로드림 님!\n여행을 더나봐요!",
-                    style = MaterialTheme.typography.titleLarge.copy(color = gray10)
+                    style = MaterialTheme.typography.titleLarge.copy(color = gray17)
                 )
 
                 Text(
                     text = "D-Day",
-                    style = MaterialTheme.typography.displayLarge.copy(color = gray10)
+                    style = MaterialTheme.typography.displayLarge.copy(color = gray17)
                 )
             }
             Spacer(modifier = Modifier.height(15.dp))
