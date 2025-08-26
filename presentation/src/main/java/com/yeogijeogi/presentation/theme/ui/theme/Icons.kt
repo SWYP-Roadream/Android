@@ -49,3 +49,7 @@ val CalenderOutline: ImageVector
 val CaretDownOutline: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.caret_down_outline)
+
+val ArrowLeft: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.arrow_left)

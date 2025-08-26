@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
@@ -36,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -53,6 +55,9 @@ import com.yeogijeogi.presentation.theme.ui.theme.gray30
 import com.yeogijeogi.presentation.theme.ui.theme.gray40
 import com.yeogijeogi.presentation.theme.ui.theme.gray80
 import com.yeogijeogi.presentation.theme.ui.theme.gray97
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun ScheduleDateScreenRoot(
@@ -70,8 +75,8 @@ fun ScheduleDateScreenRoot(
     )
 
     if (showDatePicker) {
-        DatePickerModal(
-            onDateSelected = {},
+        DateRangePickerModal(
+            onDateRangeSelected = {},
             onDismiss = { showDatePicker = false }
         )
     }
@@ -87,7 +92,9 @@ fun ScheduleDateScreen(
         modifier = modifier
             .fillMaxSize(),
         topBar = {
-            Box {
+            Box(
+                modifier = Modifier.statusBarsPadding()
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -175,6 +182,7 @@ fun DateRangePickerModal(
     onDismiss: () -> Unit
 ) {
     val dateRangePickerState = rememberDateRangePickerState()
+//    val formatter = rememberDatePickerState()
 
     DatePickerDialog(
         onDismissRequest = onDismiss,
@@ -201,42 +209,37 @@ fun DateRangePickerModal(
     ) {
         DateRangePicker(
             state = dateRangePickerState,
-            title = {
+            headline = {
+                val startDate = formatDate(dateRangePickerState.selectedStartDateMillis)
+                val endDate = formatDate(dateRangePickerState.selectedEndDateMillis)
                 Text(
-                    text = "Select date range"
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    text = "$startDate - $endDate",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        textAlign = TextAlign.Center
+                    ),
                 )
             },
             showModeToggle = false,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(500.dp)
+                .padding(16.dp)
         )
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DatePickerModal(
-    onDateSelected: (Long?) -> Unit,
-    onDismiss: () -> Unit
-) {
-    val datePickerState = rememberDatePickerState()
+fun formatDate(millis: Long?): String {
+    if (millis == null) return ""
 
-    DatePickerDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(onClick = {
-                onDateSelected(datePickerState.selectedDateMillis)
-                onDismiss()
-            }) {
-                Text("OK")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
-        }
-    ) {
-        DatePicker(state = datePickerState)
-    }
+    val localDate = Instant.ofEpochMilli(millis)
+        .atZone(ZoneId.systemDefault())   // 원하는 타임존 적용
+        .toLocalDate()
+
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") // 원하는 패턴 지정
+    return localDate.format(formatter)
 }
 
 @Preview

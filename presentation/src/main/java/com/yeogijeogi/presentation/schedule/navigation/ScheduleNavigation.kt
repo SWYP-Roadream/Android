@@ -28,7 +28,11 @@ fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry<Schedule>()
             }
-            ScheduleTitleScreenRoot()
+            ScheduleTitleScreenRoot(
+                onRouteClick = {
+                    navController.navigate(ScheduleRoute)
+                }
+            )
         }
 
         composable<ScheduleRoute> { backStackEntry ->

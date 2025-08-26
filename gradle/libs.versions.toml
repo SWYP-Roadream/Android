@@ -30,6 +30,7 @@ googleId="1.1.1"
 kakao="2.20.1"
 timberVersion = "5.0.1"
 viewmodel-lifecycle= "2.4.0"
+googleMaps = "6.7.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -94,6 +95,7 @@ firebase-auth = { module = "com.google.firebase:firebase-auth-ktx", version.ref 
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials"}
 androidx-credentials-play-service-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials"}
 androidx-libraries-identity-googleId = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleId"}
+google-maps-android-maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "googleMaps"}
 
 #kakao
 kakao-common = { module = "com.kakao.sdk:v2-common", version.ref = "kakao"}

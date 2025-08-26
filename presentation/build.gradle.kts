@@ -23,6 +23,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
         buildConfigField("String", "ClientId", getApiKey("GOOGLE_CLIENT_ID"))
+        addManifestPlaceholders(mapOf("MAPS_API_KEY" to getApiKey("MAPS_API_KEY")))
     }
 
     buildTypes {
@@ -97,4 +98,7 @@ dependencies {
 
     //timber
     implementation(libs.timber)
+
+    //google map
+    implementation(libs.google.maps.android.maps.compose)
 }
