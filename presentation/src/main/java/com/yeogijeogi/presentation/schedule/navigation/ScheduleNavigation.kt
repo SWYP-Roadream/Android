@@ -8,6 +8,7 @@ import androidx.navigation.navigation
 import com.yeogijeogi.presentation.schedule.screen.ScheduleCreatedRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleDateScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleRouteScreenRoot
+import com.yeogijeogi.presentation.schedule.screen.ScheduleSearchRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleTitleScreenRoot
 
 fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
@@ -48,7 +49,15 @@ fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
         }
 
         composable<ScheduleCreate> {
-            ScheduleCreatedRouteScreenRoot()
+            ScheduleCreatedRouteScreenRoot(
+                onClickSearch = {
+                    navController.navigate(ScheduleSearch)
+                }
+            )
+        }
+
+        composable<ScheduleSearch> {
+            ScheduleSearchRouteScreenRoot()
         }
     }
 }

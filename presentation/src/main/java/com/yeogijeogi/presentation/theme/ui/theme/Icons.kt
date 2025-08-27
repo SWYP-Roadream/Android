@@ -61,3 +61,11 @@ val SearchOutline: ImageVector
 val EmptyLocation: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.empty_location)
+
+val Location: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.location)
+
+val Delete: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.delete)

@@ -16,3 +16,6 @@ data object ScheduleRoute
 
 @Serializable
 data object ScheduleCreate
+
+@Serializable
+data object ScheduleSearch

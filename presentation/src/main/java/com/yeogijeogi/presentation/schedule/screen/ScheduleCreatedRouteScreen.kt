@@ -3,6 +3,7 @@ package com.yeogijeogi.presentation.schedule.screen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,13 +54,17 @@ import com.yeogijeogi.presentation.theme.ui.theme.gray60
 import com.yeogijeogi.presentation.theme.ui.theme.gray95
 
 @Composable
-fun ScheduleCreatedRouteScreenRoot() {
-    ScheduleCreatedRouteScreen()
+fun ScheduleCreatedRouteScreenRoot(
+    onClickSearch: () -> Unit,
+) {
+    ScheduleCreatedRouteScreen(
+        onClickSearch = onClickSearch
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier) {
+fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier, onClickSearch: () -> Unit,) {
     val cameraPositionState = rememberCameraPositionState()
     val sheetState = rememberStandardBottomSheetState(
         initialValue = SheetValue.Expanded,
@@ -171,6 +176,7 @@ fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .clickable(onClick = onClickSearch)
                             .padding(horizontal = 16.dp, vertical = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
@@ -198,6 +204,8 @@ fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ScheduleCreatedRouteScreenPreview() {
     RoadreamTheme {
-        ScheduleCreatedRouteScreen()
+        ScheduleCreatedRouteScreen(
+            onClickSearch = {}
+        )
     }
 }
