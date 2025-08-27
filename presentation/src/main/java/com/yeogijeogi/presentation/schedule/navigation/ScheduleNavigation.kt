@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.yeogijeogi.presentation.schedule.screen.ScheduleCreatedRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleDateScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleTitleScreenRoot
@@ -39,7 +40,15 @@ fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry<Schedule>()
             }
-            ScheduleRouteScreenRoot()
+            ScheduleRouteScreenRoot(
+                onClickCreated = {
+                    navController.navigate(ScheduleCreate)
+                }
+            )
+        }
+
+        composable<ScheduleCreate> {
+            ScheduleCreatedRouteScreenRoot()
         }
     }
 }

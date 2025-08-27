@@ -42,13 +42,20 @@ import com.yeogijeogi.presentation.theme.ui.theme.gray60
 import com.yeogijeogi.presentation.theme.ui.theme.gray97
 
 @Composable
-fun ScheduleRouteScreenRoot() {
-    ScheduleRouteScreen()
+fun ScheduleRouteScreenRoot(
+    onClickCreated: () -> Unit,
+) {
+    ScheduleRouteScreen(
+        onClickCreated = onClickCreated
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScheduleRouteScreen(modifier: Modifier = Modifier) {
+fun ScheduleRouteScreen(
+    modifier: Modifier = Modifier,
+    onClickCreated: () -> Unit,
+) {
     val cameraPositionState = rememberCameraPositionState()
     Scaffold(
         modifier = modifier,
@@ -127,7 +134,7 @@ fun ScheduleRouteScreen(modifier: Modifier = Modifier) {
                     RouteItem(
                         modifier = Modifier.padding(horizontal = 20.dp),
                         day = it + 1,
-                        onClick = {}
+                        onClick = onClickCreated
                     )
                     if(it != 2) {
                         Spacer(modifier = Modifier.height(24.dp))
@@ -146,6 +153,8 @@ fun ScheduleRouteScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ScheduleCreateScreenPreview() {
     RoadreamTheme {
-        ScheduleRouteScreen()
+        ScheduleRouteScreen(
+            onClickCreated = {}
+        )
     }
 }

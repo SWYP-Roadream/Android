@@ -53,3 +53,11 @@ val CaretDownOutline: ImageVector
 val ArrowLeft: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.arrow_left)
+
+val SearchOutline: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.search_outline)
+
+val EmptyLocation: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.empty_location)

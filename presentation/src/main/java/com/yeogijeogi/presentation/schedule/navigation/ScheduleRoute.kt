@@ -13,3 +13,6 @@ data object ScheduleTitle
 
 @Serializable
 data object ScheduleRoute
+
+@Serializable
+data object ScheduleCreate
