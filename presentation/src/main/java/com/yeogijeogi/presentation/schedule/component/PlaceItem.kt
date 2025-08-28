@@ -1,6 +1,7 @@
 package com.yeogijeogi.presentation.schedule.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,10 +40,11 @@ fun PlaceItem(
     starRatio: String,
     starCount: Int,
     address: String,
-
+    onClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
+            .clickable(onClick = onClick)
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 20.dp),
@@ -66,7 +68,6 @@ fun PlaceItem(
         Spacer(modifier = Modifier.height(4.dp))
         Row(
             modifier = Modifier.padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(7.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
@@ -121,7 +122,8 @@ private fun PlaceItemPreview() {
             categoryName = "카테고리",
             starRatio = "4.6",
             starCount = 0,
-            address = "OO시 OO동"
+            address = "OO시 OO동",
+            onClick = {}
         )
     }
 }

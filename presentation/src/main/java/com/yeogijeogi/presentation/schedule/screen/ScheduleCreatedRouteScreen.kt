@@ -52,6 +52,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,6 +61,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.yeogijeogi.presentation.component.FilterBadge
+import com.yeogijeogi.presentation.schedule.component.PlaceDetailItem
 import com.yeogijeogi.presentation.schedule.component.PlaceItem
 import com.yeogijeogi.presentation.schedule.model.BottomSheetState
 import com.yeogijeogi.presentation.schedule.model.schedulecreate.ScheduleCreateState
@@ -220,7 +222,8 @@ fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier, state: ScheduleCre
                                 categoryName = "카테고리",
                                 starRatio = "4.6",
                                 starCount = 0,
-                                address = "OO시 OO동"
+                                address = "OO시 OO동",
+                                onClick = {}
                             )
                             HorizontalDivider(
                                 modifier = Modifier.padding(horizontal = 20.dp),
@@ -229,14 +232,16 @@ fun ScheduleCreatedRouteScreen(modifier: Modifier = Modifier, state: ScheduleCre
                         }
                     }
                 }
-                BottomSheetState.DETAIL -> {
-                    Column(
-                        modifier = Modifier
-                            .navigationBarsPadding()
-                            .height(configuration.screenHeightDp.dp * 0.5f)
-                    ) {
 
-                    }
+                BottomSheetState.DETAIL -> {
+                    PlaceDetailItem(
+                        modifier = Modifier.navigationBarsPadding(),
+                        placeName = "장소 이름",
+                        categoryName = "카테고리",
+                        starRatio = "4.6",
+                        reviewCount = 3,
+                        address = "도시이름 OO구"
+                    )
                 }
             }
         }
