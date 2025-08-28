@@ -1,6 +1,7 @@
 package com.yeogijeogi.presentation.schedule.navigation
 
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import com.yeogijeogi.presentation.schedule.screen.ScheduleDateScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleSearchRouteScreenRoot
 import com.yeogijeogi.presentation.schedule.screen.ScheduleTitleScreenRoot
+import com.yeogijeogi.presentation.schedule.viewmodel.ScheduleCreateViewModel
 
 fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
     navigation<Schedule>(
@@ -48,16 +50,30 @@ fun NavGraphBuilder.scheduleNavigation(navController: NavHostController) {
             )
         }
 
-        composable<ScheduleCreate> {
+        composable<ScheduleCreate> { backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry<ScheduleCreate>()
+            }
+            val viewModel = hiltViewModel<ScheduleCreateViewModel>(parentEntry)
             ScheduleCreatedRouteScreenRoot(
+                viewModel = viewModel,
                 onClickSearch = {
                     navController.navigate(ScheduleSearch)
                 }
             )
         }
 
-        composable<ScheduleSearch> {
-            ScheduleSearchRouteScreenRoot()
+        composable<ScheduleSearch> { backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry<ScheduleCreate>()
+            }
+            val viewModel = hiltViewModel<ScheduleCreateViewModel>(parentEntry)
+            ScheduleSearchRouteScreenRoot(
+                viewModel = viewModel,
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

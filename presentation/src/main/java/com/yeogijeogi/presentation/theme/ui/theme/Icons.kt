@@ -69,3 +69,7 @@ val Location: ImageVector
 val Delete: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.delete)
+
+val Star: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.star)
